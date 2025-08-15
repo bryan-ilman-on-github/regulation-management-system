@@ -1,7 +1,7 @@
 from fastapi import FastAPI
 from .core.database import engine, Base
-from .models import regulation
-from .api.endpoints import regulations
+from .models import regulation, user
+from .api.endpoints import regulations, auth
 
 # This line creates the table if it doesn't exist
 Base.metadata.create_all(bind=engine)
@@ -12,11 +12,8 @@ app = FastAPI(
     version="0.1.0"
 )
 
-app.include_router(
-    regulations.router, 
-    prefix="/api/v1/regulations", 
-    tags=["Regulations"]
-)
+app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
+app.include_router(regulations.router, prefix="/api/v1/regulations", tags=["Regulations"])
 
 @app.get("/", tags=["Root"])
 def read_root():

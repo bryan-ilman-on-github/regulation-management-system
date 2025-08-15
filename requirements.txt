@@ -6,3 +6,8 @@ python-dotenv
 requests
 beautifulsoup4
 lxml
+passlib[bcrypt]
+python-jose[cryptography]
+redis
+pydantic[email]
+python-multipart
