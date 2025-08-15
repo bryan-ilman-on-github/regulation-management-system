@@ -1,7 +1,10 @@
-# app/main.py
 from fastapi import FastAPI
+from .core.database import engine, Base
+from .models import regulation # Ensure models are imported
 
-# Create an instance of the FastAPI class
+# This line creates the table if it doesn't exist
+Base.metadata.create_all(bind=engine)
+
 app = FastAPI(
     title="Regulation Management System API",
     description="API for managing and querying Indonesian regulations.",
