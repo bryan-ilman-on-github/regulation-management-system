@@ -18,3 +18,5 @@ pytest-mock
 langchain
 langchain-openai
 tiktoken
+langchain-experimental
+langchain-community

@@ -15,3 +15,6 @@ REDIS_PORT = int(os.getenv("REDIS_PORT", 6379))
 SECRET_KEY = os.getenv("SECRET_KEY")
 ALGORITHM = os.getenv("ALGORITHM")
 ACCESS_TOKEN_EXPIRE_MINUTES = int(os.getenv("ACCESS_TOKEN_EXPIRE_MINUTES", 30))
+
+# OpenAI settings
+OPENAI_API_KEY = os.getenv("OPENAI_API_KEY")

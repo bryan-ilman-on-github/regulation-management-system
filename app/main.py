@@ -2,7 +2,7 @@ import logging
 from fastapi import FastAPI
 from .core.database import engine, Base
 from .models import regulation, user
-from .api.endpoints import regulations, auth
+from .api.endpoints import regulations, auth, chat
 
 # # This line creates the table if it doesn't exist
 # Base.metadata.create_all(bind=engine)
@@ -18,6 +18,7 @@ app = FastAPI(
 
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
 app.include_router(regulations.router, prefix="/api/v1/regulations", tags=["Regulations"])
+app.include_router(chat.router, prefix="/api/v1/ai", tags=["AI"])
 
 @app.get("/", tags=["Root"])
 def read_root():
