@@ -3,8 +3,8 @@ from .core.database import engine, Base
 from .models import regulation, user
 from .api.endpoints import regulations, auth
 
-# This line creates the table if it doesn't exist
-Base.metadata.create_all(bind=engine)
+# # This line creates the table if it doesn't exist
+# Base.metadata.create_all(bind=engine)
 
 app = FastAPI(
     title="Regulation Management System API",
