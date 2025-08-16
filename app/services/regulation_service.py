@@ -1,3 +1,4 @@
+import logging
 from sqlalchemy.orm import Session
 from uuid import UUID
 from fastapi import HTTPException, status
@@ -11,9 +12,11 @@ def get_regulation(db: Session, regulation_id: UUID):
     # Try to get from cache
     cached_regulation = get_cache(cache_key)
     if cached_regulation:
+        logging.info(f"CACHE HIT for regulation_id: {regulation_id}")
         return cached_regulation
 
     # If miss, get from DB
+    logging.info(f"CACHE MISS for regulation_id: {regulation_id}. Fetching from DB.")
     db_regulation = repo.get(db, regulation_id=regulation_id)
     if not db_regulation:
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail="Regulation not found")

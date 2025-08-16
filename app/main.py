@@ -1,3 +1,4 @@
+import logging
 from fastapi import FastAPI
 from .core.database import engine, Base
 from .models import regulation, user
@@ -5,6 +6,9 @@ from .api.endpoints import regulations, auth
 
 # # This line creates the table if it doesn't exist
 # Base.metadata.create_all(bind=engine)
+
+# Configure the root logger to show INFO level messages
+logging.basicConfig(level=logging.INFO)
 
 app = FastAPI(
     title="Regulation Management System API",
