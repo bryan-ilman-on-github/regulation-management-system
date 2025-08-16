@@ -5,6 +5,7 @@ from langchain.tools import Tool
 
 from ..core.config import OPENAI_API_KEY
 from .tools.sql_tool import query_database
+from .tools.rag_tool import query_document_content
 
 # Initialize the master LLM
 llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model_name="gpt-4-turbo-preview", temperature=0)
@@ -18,6 +19,13 @@ tools = [
         This includes counting regulations, listing them by year, finding status,
         or any other question that can be answered by querying a SQL table
         named 'regulation'.""",
+    ),
+    Tool(
+        name="RegulationDocumentSearch",
+        func=query_document_content,
+        description="""Use this tool for detailed questions about the SPECIFIC CONTENT,
+        articles, clauses, or definitions inside a regulation document.
+        The input should be a very specific question about the document's text.""",
     )
 ]
 
