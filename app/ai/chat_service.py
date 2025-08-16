@@ -1,14 +1,16 @@
-from langchain_openai import ChatOpenAI
 from langchain.agents import AgentExecutor, create_openai_functions_agent
 from langchain.prompts import ChatPromptTemplate, MessagesPlaceholder
 from langchain.tools import Tool
+from langchain_openai import ChatOpenAI
 
 from ..core.config import OPENAI_API_KEY
-from .tools.sql_tool import query_database
 from .tools.rag_tool import query_document_content
+from .tools.sql_tool import query_database
 
 # Initialize the master LLM
-llm = ChatOpenAI(openai_api_key=OPENAI_API_KEY, model_name="gpt-4-turbo-preview", temperature=0)
+llm = ChatOpenAI(
+    openai_api_key=OPENAI_API_KEY, model_name="gpt-4-turbo-preview", temperature=0
+)
 
 # Define the tools the agent can use
 tools = [
@@ -26,15 +28,20 @@ tools = [
         description="""Use this tool for detailed questions about the SPECIFIC CONTENT,
         articles, clauses, or definitions inside a regulation document.
         The input should be a very specific question about the document's text.""",
-    )
+    ),
 ]
 
 # Create the prompt for the master agent
-prompt = ChatPromptTemplate.from_messages([
-    ("system", "You are a powerful assistant that can answer questions about Indonesian regulations."),
-    ("user", "{input}"),
-    MessagesPlaceholder(variable_name="agent_scratchpad"),
-])
+prompt = ChatPromptTemplate.from_messages(
+    [
+        (
+            "system",
+            "You are a powerful assistant that can answer questions about Indonesian regulations.",
+        ),
+        ("user", "{input}"),
+        MessagesPlaceholder(variable_name="agent_scratchpad"),
+    ]
+)
 
 # Create the master agent
 agent = create_openai_functions_agent(llm, tools, prompt)

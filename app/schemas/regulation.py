@@ -3,6 +3,7 @@ from typing import Optional, List, Any
 from uuid import UUID
 import datetime
 
+
 # Shared properties
 class RegulationBase(BaseModel):
     nama_peraturan: Optional[str] = None
@@ -12,6 +13,7 @@ class RegulationBase(BaseModel):
     tahun: Optional[str] = None
     status: Optional[str] = None
 
+
 # Properties to receive on item creation
 class RegulationCreate(RegulationBase):
     # Make fields required for creation
@@ -19,14 +21,17 @@ class RegulationCreate(RegulationBase):
     judul: str
     tahun: str
 
+
 # Properties to receive on item update
 class RegulationUpdate(RegulationBase):
     pass
+
 
 # Properties shared by models stored in DB
 class RegulationInDBBase(RegulationBase):
     regulation_id: UUID
     model_config = ConfigDict(from_attributes=True)
+
 
 # Properties to return to client
 class Regulation(RegulationInDBBase):

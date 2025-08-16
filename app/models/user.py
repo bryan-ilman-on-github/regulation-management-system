@@ -1,7 +1,8 @@
-import uuid
+from ..core.database import Base
 from sqlalchemy import Column, String, Boolean
 from sqlalchemy.dialects.postgresql import UUID
-from ..core.database import Base
+import uuid
+
 
 class User(Base):
     __tablename__ = "users"

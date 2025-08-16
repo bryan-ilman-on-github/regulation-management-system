@@ -1,8 +1,8 @@
-import logging
-from fastapi import FastAPI
+from .api.endpoints import regulations, auth, chat
 from .core.database import engine, Base
 from .models import regulation, user
-from .api.endpoints import regulations, auth, chat
+from fastapi import FastAPI
+import logging
 
 # # This line creates the table if it doesn't exist
 # Base.metadata.create_all(bind=engine)
@@ -13,12 +13,15 @@ logging.basicConfig(level=logging.INFO)
 app = FastAPI(
     title="Regulation Management System API",
     description="API for managing and querying Indonesian regulations.",
-    version="0.1.0"
+    version="0.1.0",
 )
 
 app.include_router(auth.router, prefix="/api/v1/auth", tags=["Auth"])
-app.include_router(regulations.router, prefix="/api/v1/regulations", tags=["Regulations"])
+app.include_router(
+    regulations.router, prefix="/api/v1/regulations", tags=["Regulations"]
+)
 app.include_router(chat.router, prefix="/api/v1/ai", tags=["AI"])
+
 
 @app.get("/", tags=["Root"])
 def read_root():

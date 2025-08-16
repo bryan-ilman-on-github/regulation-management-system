@@ -1,28 +1,34 @@
-import os
-import requests
-from sqlalchemy.orm import Session
+from app.core.config import OPENAI_API_KEY
 from app.core.database import SessionLocal
 from app.models.regulation import Regulation
-from langchain_community.document_loaders import PyPDFLoader
 from langchain.text_splitter import RecursiveCharacterTextSplitter
-from langchain_openai import OpenAIEmbeddings
+from langchain_community.document_loaders import PyPDFLoader
 from langchain_community.vectorstores import FAISS
-from app.core.config import OPENAI_API_KEY
+from langchain_openai import OpenAIEmbeddings
+from sqlalchemy.orm import Session
+import os
+import requests
 
 PDFS_DIR = "data/pdfs"
 FAISS_INDEX_PATH = "data/faiss_index"
 NUM_PDFS_TO_PROCESS = 15
 
+
 def process_all_pdfs():
     os.makedirs(PDFS_DIR, exist_ok=True)
     db: Session = SessionLocal()
 
-    regulations = db.query(Regulation).filter(Regulation.file_pdf.isnot(None)).limit(NUM_PDFS_TO_PROCESS).all()
+    regulations = (
+        db.query(Regulation)
+        .filter(Regulation.file_pdf.isnot(None))
+        .limit(NUM_PDFS_TO_PROCESS)
+        .all()
+    )
     db.close()
 
     # Define a User-Agent header to mimic a browser
     headers = {
-        'User-Agent': 'Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36'
+        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/91.0.4472.124 Safari/537.36"
     }
 
     documents = []
@@ -34,12 +40,12 @@ def process_all_pdfs():
                 # Use the headers in the request
                 response = requests.get(reg.file_pdf, headers=headers)
                 response.raise_for_status()
-                with open(pdf_path, 'wb') as f:
+                with open(pdf_path, "wb") as f:
                     f.write(response.content)
             except requests.RequestException as e:
                 print(f"Failed to download {reg.file_pdf}: {e}")
                 continue
-        
+
         # This part only runs if the PDF exists or was downloaded successfully
         print(f"Loading document {pdf_path}...")
         try:
@@ -66,6 +72,7 @@ def process_all_pdfs():
     # Save the FAISS index locally
     vector_store.save_local(FAISS_INDEX_PATH)
     print(f"FAISS index created and saved to {FAISS_INDEX_PATH}")
+
 
 if __name__ == "__main__":
     process_all_pdfs()

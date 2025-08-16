@@ -1,7 +1,8 @@
-import uuid
+from ..core.database import Base
 from sqlalchemy import Column, String, Text, Date, JSON
 from sqlalchemy.dialects.postgresql import UUID
-from ..core.database import Base
+import uuid
+
 
 class Regulation(Base):
     __tablename__ = "regulation"

@@ -1,10 +1,12 @@
-from sqlalchemy.orm import Session
+from ..core.security import get_password_hash
 from ..models.user import User
 from ..schemas.user import UserCreate
-from ..core.security import get_password_hash
+from sqlalchemy.orm import Session
+
 
 def get_by_email(db: Session, *, email: str) -> User | None:
     return db.query(User).filter(User.email == email).first()
+
 
 def create(db: Session, *, obj_in: UserCreate) -> User:
     hashed_password = get_password_hash(obj_in.password)
