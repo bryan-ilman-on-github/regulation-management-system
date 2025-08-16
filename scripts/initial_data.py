@@ -5,6 +5,7 @@ from app.core.database import engine, Base
 # You must import all of your SQLAlchemy models here.
 # This is how the 'Base' object learns about the tables that need to be created.
 from app.models.regulation import Regulation
+from app.models.user import User
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
