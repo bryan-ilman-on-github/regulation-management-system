@@ -1,5 +1,35 @@
 # Regulation Management System & AI Assistant
 
+## Table of Contents
+
+- [🚀 Project Overview](#-project-overview)
+- [🏛️ Architecture & Design Decisions](#️-architecture--design-decisions)
+  - [1. The Three-Layer Backend Architecture](#1-the-three-layer-backend-architecture)
+  - [2. AI Agent & Tool-Based Design](#2-ai-agent--tool-based-design)
+  - [3. Caching Strategy: Cache-Aside with Redis](#3-caching-strategy-cache-aside-with-redis)
+  - [4. Vector Store: Local FAISS Index](#4-vector-store-local-faiss-index)
+- [✅ Task Completion Status](#-task-completion-status)
+  - [Core Requirements](#core-requirements)
+  - [Backend Engineer Requirements](#backend-engineer-requirements)
+  - [AI Engineer Requirements](#ai-engineer-requirements)
+  - [Bonus Features Completed](#bonus-features-completed)
+- [⚙️ Getting Started: Setup & Installation](#️-getting-started-setup--installation)
+  - [Prerequisites](#prerequisites)
+  - [Step 1: Clone the Repository](#step-1-clone-the-repository)
+  - [Step 2: Configure Environment Variables](#step-2-configure-environment-variables)
+  - [Step 3: Launch the Application](#step-3-launch-the-application)
+- [📊 Data Population & AI Setup](#-data-population--ai-setup)
+  - [Step 1: Create Database Tables](#step-1-create-database-tables)
+  - [Step 2: Populate the Regulations Database](#step-2-populate-the-regulations-database)
+  - [Step 3: Process PDFs for the RAG AI](#step-3-process-pdfs-for-the-rag-ai)
+- [🔗 Accessing the Application](#-accessing-the-application)
+- [👨‍💻 How to Use the API](#-how-to-use-the-api)
+  - [1. Authentication Flow](#1-authentication-flow)
+  - [2. Interacting with the AI Assistant](#2-interacting-with-the-ai-assistant)
+- [🧪 Running the Test Suite](#-running-the-test-suite)
+  - [Run All Tests](#run-all-tests)
+  - [Check Test Coverage](#check-test-coverage)
+
 ## 🚀 Project Overview
 
 This repository contains the source code for a comprehensive technical assessment, demonstrating a dual-skill set in both **Backend Engineering** and **AI Engineering**. The project is a FastAPI-based system designed to manage and query a database of 1,773 Indonesian regulations, scraped from `peraturan.bpk.go.id`.
