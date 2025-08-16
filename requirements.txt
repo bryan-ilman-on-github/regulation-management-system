@@ -20,3 +20,5 @@ langchain-openai
 tiktoken
 langchain-experimental
 langchain-community
+pypdf
+faiss-cpu
