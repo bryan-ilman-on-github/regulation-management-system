@@ -1,3 +1,4 @@
+asyncpg
 beautifulsoup4
 black
 faiss-cpu
@@ -13,6 +14,7 @@ psycopg2-binary
 pydantic[email]
 pypdf
 pytest
+pytest-asyncio
 pytest-cov
 pytest-mock
 python-dotenv
@@ -20,6 +22,6 @@ python-jose[cryptography]
 python-multipart
 redis
 requests
-sqlalchemy
+sqlalchemy[asyncio]
 tiktoken
 uvicorn[standard]

@@ -1,10 +1,9 @@
-# scripts/populate_db.py
-import requests
 from bs4 import BeautifulSoup
 from sqlalchemy.orm import Session
-import time
 import logging
-import re  # Import the regular expression module
+import re
+import requests
+import time
 
 # Set up basic logging
 logging.basicConfig(

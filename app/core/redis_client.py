@@ -1,5 +1,5 @@
-import redis
 import json
+import redis
 
 # Initialize the client variable as None as it will be created on first use
 redis_client = None

@@ -25,7 +25,7 @@
 
 ### Bonus Features Completed
 
-- 🚫 Real-time streaming with SSE
+- ✅ Real-time streaming with SSE
 - 🚫 Citation extraction from PDFs
 
 ### Notes
